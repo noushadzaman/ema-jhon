@@ -9,6 +9,7 @@
 .product img {
     width: 286px;
     height: 286px;
+    margin: 7px;
 }
 
 .product-name {
