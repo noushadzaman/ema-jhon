@@ -208,19 +208,6 @@
         "quantity": 0
     },
     {
-        "id": "e1dbc7fe-be17-4e0f-9e2d-6ad5dbc102fc",
-        "category": "Men's Pants",
-        "name": "ESSENTIALS4GAMEDAY PANTS",
-        "seller": "Addidas",
-        "price": 185,
-        "stock": 43,
-        "ratings": 5,
-        "ratingsCount": 2676,
-        "img": "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/64f1ba254925439d88eaad920127d77e_9366/Essentials4Gameday_Pants_Black_HE1800_21_model.jpg",
-        "shipping": 27,
-        "quantity": 0
-    },
-    {
         "id": "0298e695-1f9b-49b1-9961-8a8460f95b1c",
         "category": "Men's Boot",
         "name": "TERREX FREE HIKER GORE-TEX HIKING SHOES",

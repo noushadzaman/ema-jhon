@@ -31,7 +31,6 @@ const Shop = () => {
         }
         // step 5: set the cart 
         setCart(savedCart);
-        console.log(savedCart);
     }, [products])
 
     const handleAddToCart = (product) => {
