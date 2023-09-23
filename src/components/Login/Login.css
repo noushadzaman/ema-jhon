@@ -1,0 +1,80 @@
+.form-container {
+    width: 500px;
+    height: 600px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    border: 1px solid #95A0A7;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-title {
+    color: #2A414F;
+    font-family: Lato;
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.088px;
+    text-align: center;
+}
+
+.form-control {
+    margin-bottom: 20px;
+}
+
+.form-control>label {
+    display: block;
+    color: #2A414F;
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: 0.026px;
+    margin-bottom: 10px;
+}
+
+.form-control>input {
+    border-radius: 5px;
+    border: 1px solid #95A0A7;
+    width: 415px;
+    height: 55px;
+    flex-shrink: 0;
+    font-size: 1.5em;
+    padding-left: 10px;
+}
+
+.btn-submit {
+    width: 429px;
+    height: 55px;
+    flex-shrink: 0;
+    border-radius: 5px;
+    background: rgba(255, 153, 0, 0.30);
+    border: none;
+    color: #0E161A;
+    font-size: 21px;
+    font-weight: 400;
+    letter-spacing: 0.032px;
+}
+
+.btn-submit:hover {
+    background: rgba(255, 153, 0, 0.60);
+
+}
+
+.sign-log-toggle {
+    color: #2A414F;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.038px;
+}
+
+.sign-log-toggle-link {
+    color: #F90;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.038px;
+    text-decoration: none;
+}
