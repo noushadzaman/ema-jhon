@@ -8,14 +8,36 @@ import { Link, useLoaderData } from 'react-router-dom';
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
-    const totalCount = useLoaderData();
-    console.log(totalCount);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [itemsPerPage, setItemsPerPage] = useState(9);
+    const { count } = useLoaderData();
+    // const itemsPerPage = 10;
+    const numberOfPages = Math.ceil(count / itemsPerPage);
+
+    // const pages = [];
+    // for (let i = 0; i < numberOfPages; i++) {
+    //     pages.push(i);
+    // }
+    // console.log(pages);
+    const pages = [...Array(numberOfPages).keys()];
+
+
+    //* 
+    //* DONE 1: get the total number of products
+    //* DONE 2: number of items per page dynamic
+    //* 
+    //* 
+    //* 
+    //* 
+    //* 
+    //* 
+    //* 
 
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch(`http://localhost:5000/products?page=${currentPage}&size=${itemsPerPage}`)
             .then(res => res.json())
             .then(data => setProducts(data))
-    }, [])
+    }, [currentPage, itemsPerPage]);
 
     useEffect(() => {
         const storedCart = getShoppingCart();
@@ -35,7 +57,7 @@ const Shop = () => {
         }
         // step 5: set the cart 
         setCart(savedCart);
-    }, [products])
+    }, [products]);
 
     const handleAddToCart = (product) => {
         // const newCart = [...cart, product];
@@ -52,11 +74,24 @@ const Shop = () => {
         }
         setCart(newCart);
         addToDb(product.id);
-    }
-        ;
+    };
+
     const handleClearCart = () => {
         setCart([]);
         deleteShoppingCart();
+    };
+
+    const handleItemsPerPage = (e) => {
+        setCurrentPage(0);
+        const val = parseInt(e.target.value);
+        setItemsPerPage(val);
+    }
+    const handlePageMove = (move) => {
+        if (move === 'forward' && currentPage < numberOfPages - 1) {
+            setCurrentPage(currentPage + 1);
+        } else if (move === 'backward' && currentPage) {
+            setCurrentPage(currentPage - 1);
+        }
     }
 
     return (
@@ -77,6 +112,25 @@ const Shop = () => {
                 >
                     <Link className='proceed-link' to={"/orders"}><button className='btn-proceed'>Review Order</button></Link>
                 </Cart>
+            </div>
+            <div className='pagination'>
+                <p>Current Page: {currentPage}</p>
+                <button onClick={() => handlePageMove('backward')}>Previous</button>
+                {
+                    pages.map(page => <button
+                        className={page === currentPage ? `selected` : ''}
+                        onClick={() => setCurrentPage(page)}
+                        key={page}
+                    >{page}</button>)
+                }
+                <select value={itemsPerPage} onChange={handleItemsPerPage}>
+                    <option value="9">9</option>
+                    <option value="12">12</option>
+                    <option value="15">15</option>
+                    <option value="18">18</option>
+                    <option value="24">24</option>
+                </select>
+                <button onClick={() => handlePageMove('forward')}>Next</button>
             </div>
         </div>
     );
