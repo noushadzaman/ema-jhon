@@ -3,14 +3,16 @@ import './Shop.css';
 import Product from '../Product/Product';
 import Cart from '../Cart/Cart';
 import { addToDb, deleteShoppingCart, getShoppingCart } from '../../utilities/fakeDb';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const totalCount = useLoaderData();
+    console.log(totalCount);
 
     useEffect(() => {
-        fetch('products.json')
+        fetch('http://localhost:5000/products')
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [])
@@ -51,6 +53,7 @@ const Shop = () => {
         setCart(newCart);
         addToDb(product.id);
     }
+        ;
     const handleClearCart = () => {
         setCart([]);
         deleteShoppingCart();
@@ -68,9 +71,9 @@ const Shop = () => {
                 }
             </div>
             <div className='cart-container'>
-                <Cart 
-                cart={cart}
-                handleClearCart={handleClearCart}
+                <Cart
+                    cart={cart}
+                    handleClearCart={handleClearCart}
                 >
                     <Link className='proceed-link' to={"/orders"}><button className='btn-proceed'>Review Order</button></Link>
                 </Cart>
