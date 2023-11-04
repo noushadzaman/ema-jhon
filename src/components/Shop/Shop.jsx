@@ -7,10 +7,15 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
+    const initialCart = useLoaderData();
+    const [cart, setCart] = useState(initialCart);
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(9);
-    const { count } = useLoaderData();
+    // const { count } = useLoaderData();
+    // const count = 65;
+    const [count, setCount] = useState(0);
+    const storedCart = getShoppingCart();
+    const storedCartIds = Object.keys(storedCart);
     // const itemsPerPage = 10;
     const numberOfPages = Math.ceil(count / itemsPerPage);
 
@@ -20,6 +25,12 @@ const Shop = () => {
     // }
     // console.log(pages);
     const pages = [...Array(numberOfPages).keys()];
+
+    useEffect(() => {
+        fetch('http://localhost:5000/productsCount')
+            .then(res => res.json())
+            .then(data => setCount(data.count))
+    }, [])
 
 
     //* 
@@ -39,25 +50,24 @@ const Shop = () => {
             .then(data => setProducts(data))
     }, [currentPage, itemsPerPage]);
 
-    useEffect(() => {
-        const storedCart = getShoppingCart();
-        console.log(storedCart);
-        // step 1: get id of the storedcart
-        const savedCart = [];
-        for (const id in storedCart) {
-            // step 2: get product from products state by using id
-            const addedProduct = products.find(product => product.id == id)
-            if (addedProduct) {
-                // step 3: add quantity
-                const quantity = storedCart[id];
-                addedProduct.quantity = quantity;
-                // step 4: add the product to saved cart
-                savedCart.push(addedProduct);
-            }
-        }
-        // step 5: set the cart 
-        setCart(savedCart);
-    }, [products]);
+    // useEffect(() => {
+    //     console.log(storedCart);
+    //     // step 1: get id of the storedcart
+    //     const savedCart = [];
+    //     for (const id in storedCart) {
+    //         // step 2: get product from products state by using id
+    //         const addedProduct = products.find(product => product.id == id)
+    //         if (addedProduct) {
+    //             // step 3: add quantity
+    //             const quantity = storedCart[id];
+    //             addedProduct.quantity = quantity;
+    //             // step 4: add the product to saved cart
+    //             savedCart.push(addedProduct);
+    //         }
+    //     }
+    //     // step 5: set the cart 
+    //     setCart(savedCart);
+    // }, [products]);
 
     const handleAddToCart = (product) => {
         // const newCart = [...cart, product];
@@ -86,6 +96,7 @@ const Shop = () => {
         const val = parseInt(e.target.value);
         setItemsPerPage(val);
     }
+
     const handlePageMove = (move) => {
         if (move === 'forward' && currentPage < numberOfPages - 1) {
             setCurrentPage(currentPage + 1);
