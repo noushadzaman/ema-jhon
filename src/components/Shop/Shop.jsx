@@ -27,7 +27,7 @@ const Shop = () => {
     const pages = [...Array(numberOfPages).keys()];
 
     useEffect(() => {
-        fetch('http://localhost:5000/productsCount')
+        fetch('https://ema-john-server-dusky.vercel.app/productsCount')
             .then(res => res.json())
             .then(data => setCount(data.count))
     }, [])
@@ -45,7 +45,7 @@ const Shop = () => {
     //* 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products?page=${currentPage}&size=${itemsPerPage}`)
+        fetch(`https://ema-john-server-dusky.vercel.app/products?page=${currentPage}&size=${itemsPerPage}`)
             .then(res => res.json())
             .then(data => setProducts(data))
     }, [currentPage, itemsPerPage]);

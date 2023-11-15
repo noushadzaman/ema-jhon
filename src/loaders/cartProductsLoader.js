@@ -1,7 +1,7 @@
 import { getShoppingCart } from "../utilities/fakeDb";
 
 const cartProductsLoaders = async () => {
-    const loadedProducts = await fetch('http://localhost:5000/products');
+    const loadedProducts = await fetch('https://ema-john-server-dusky.vercel.app/products');
     const products = await loadedProducts.json();
 
 
